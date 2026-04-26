@@ -1,8 +1,8 @@
-# =============================================================================
+# 
 # CS 2026 - Criptografia i Seguretat
 # Activitat 4: Anàlisi estadística del text xifrat
 # Autores: Elena i Cristina
-# =============================================================================
+# 
 
 import random
 import matplotlib
@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import numpy as np
 
-# ─── AES-128 (implementació pròpia, autocontinguda) ───────────────────────────
+# AES-128 (implementació pròpia, autocontinguda) 
 
 SBOX = [
     0x63,0x7c,0x77,0x7b,0xf2,0x6b,0x6f,0xc5,0x30,0x01,0x67,0x2b,0xfe,0xd7,0xab,0x76,
@@ -82,7 +82,7 @@ def aes_encrypt(plaintext, key):
     return [s[r][c] for c in range(4) for r in range(4)]
 
 
-# ─── Generació i xifratge dels blocs ─────────────────────────────────────────
+# Generació i xifratge dels blocs 
 
 random.seed(42)
 k = [random.randint(0, 255) for _ in range(16)]   # mateixa clau que Act. 1
@@ -102,7 +102,7 @@ for _ in range(N_BLOCKS):
 total_bytes    = N_BLOCKS * 16      # 1,600,000
 expected_count = total_bytes / 256  # 6,250.0
 
-# ─── Test chi-quadrat ─────────────────────────────────────────────────────────
+# Test chi-quadrat 
 # H0: la distribució dels bytes és uniforme (cada valor apareix ~6,250 vegades)
 chi2 = sum((count - expected_count)**2 / expected_count for count in byte_counts)
 # Valor crític per a α=0.05 i df=255 és ≈ 293.25
@@ -125,7 +125,7 @@ if chi2 < critical_value:
 else:
     print("\n→ Es rebutja H₀: la distribució NO és uniforme.")
 
-# ─── Gràfics ──────────────────────────────────────────────────────────────────
+# Gràfics 
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 x_vals = np.arange(256)
 
